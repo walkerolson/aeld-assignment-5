@@ -1,0 +1,24 @@
+#!/bin/sh
+
+DAEMON=/usr/bin/aesdsocket
+
+case "$1" in
+    start)
+        start-stop-daemon --start --quiet --oknodo --exec "$DAEMON" -- -d
+        ;;
+    stop)
+        start-stop-daemon --stop --quiet --oknodo --exec "$DAEMON" \
+            --signal TERM --retry=TERM/10
+        ;;
+    restart)
+        "$0" stop || exit $?
+        "$0" start
+        ;;
+    status)
+        start-stop-daemon --status --exec "$DAEMON"
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}" >&2
+        exit 1
+        ;;
+esac
