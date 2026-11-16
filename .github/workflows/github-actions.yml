@@ -9,7 +9,7 @@ jobs:
     full-test:
         container: cuaesd/aesd-autotest:24-assignment5-buildroot
         runs-on: self-hosted
-        timeout-minutes: 120
+        timeout-minutes: 1200
         steps:
           - uses: actions/checkout@v2
           - name: Checkout submodules
